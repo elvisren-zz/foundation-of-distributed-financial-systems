@@ -1,0 +1,194 @@
+\documentclass[reqno,heading=true,fontset=macnew]{ctexbook}
+
+
+
+\usepackage{amssymb}
+\usepackage{latexsym}
+
+
+
+% algorithm
+\usepackage{algpseudocode}
+\usepackage[section]{algorithm}
+\usepackage{algorithmicx}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{float}
+
+% math theorem, lemma, proof
+\usepackage{amsthm}
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}
+%\newtheorem{theorem}{Theorem}
+
+\usepackage{thmtools}
+\declaretheorem{theorem}
+\declaretheorem{definition}
+\declaretheorem{example}
+\declaretheorem{axiom}
+
+
+
+% for mathematical integratoin
+\usepackage{commath}
+
+
+% for drawing beautiful math commutative diagram
+% note:
+%   it treat nodes as a matrix and use "&" to separate row and "\\" for line.
+%   "'" change the label from above arrow to below arrow.
+%   "l", "r" and "d" means move among matrix nodes.
+\usepackage{tikz-cd}
+
+
+% create index
+\usepackage{mathtools}
+\usepackage{makeidx}
+\makeindex
+
+
+\usepackage{listings}
+
+
+
+% set font
+
+
+
+%! TEX program = xelatex
+\usepackage{fontspec}
+%\setmainfont{PingFang SC}
+%\setsansfont{Hiragino Sans GB}
+%\setmonofont[Scale=0.9]{PingFang SC}
+\usepackage{xeCJK}
+%\setCJKmainfont{PingFang SC}
+\setCJKmainfont{STKaiti}
+\setCJKsansfont{PingFang SC}
+\setCJKmonofont{PingFang SC}
+
+
+
+% no space in itemize
+\usepackage{enumitem}
+\setenumerate{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setitemize{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+
+
+% set line space
+\usepackage{setspace}
+
+
+
+% set page size
+\usepackage{geometry}
+%\geometry{a4paper}
+\geometry{a4paper,top=2cm,bottom=2cm,left=2.5cm,right=2cm}
+
+
+% set programming code highlight
+% \usepackage[chapter]{minted}
+
+
+% setup bibtex
+\usepackage{cite}
+
+
+
+% set toc and section level
+\setcounter{secnumdepth}{7}
+\setcounter{tocdepth}{7}
+
+
+
+% customized commands
+\newcommand\cindex[1]{\textcolor{blue}{\textbf{#1}}\index{#1}}
+\newcommand\mathhilight[1]{\mathop{\bf #1\/}}
+
+
+% set theory
+\newcommand\powerset[1]{\mathcal{P}\left( #1 \right)}
+\newcommand\range[1]{\mathbf{ran}(#1)}
+\newcommand\domain[1]{\mathbf{dom}(#1)}
+\newcommand\allordinals[0]{\mathbf{Ord}}
+\newcommand\transfinitesequence[1]{\left< #1 \right>}
+\newcommand\supremum[1]{\mathbf{sup} \set{#1}}
+\newcommand\infimum[1]{\mathbf{inf} \set{#1}}
+
+
+
+%linear algebra
+\newcommand\nullspace[1]{\mathcal{N}(#1)}
+\newcommand\rangespace[1]{\mathcal{R}(#1)}
+\newcommand\absolutevalue[1]{\abs{#1}}
+\newcommand\determinate[1]{\absolutevalue{#1}}
+\newcommand\coordinate[1]{\sbr{#1}}
+\newcommand\projection[2]{\mathbf{proj}_{#2} #1}
+
+
+\newcommand\dimension[1]{\displaystyle \mathbf{dim}\left( #1 \right)}
+\newcommand\rank[1]{\displaystyle \mathbf{rank}( #1 )}
+\newcommand\innerproduct[2]{\left\langle \displaystyle #1, #2 \right\rangle}
+\newcommand\trace[1]{\displaystyle \mathbf{tr}( #1 )}
+
+
+\newcommand\adjugate[1]{\displaystyle \mathbf{adj} \displaystyle #1 }
+\newcommand\cofactor[1]{\displaystyle \mathbf{cof} \displaystyle #1 }
+
+\newcommand\columnvector[1]{\boldsymbol{#1}}
+
+
+%probability
+\newcommand\probability[1]{\mathop{\bf P\/}\displaystyle \left\{#1\right\}}
+\newcommand\expect[1]{\mathop{\bf E\/}\displaystyle  \left[ #1 \right]}
+\newcommand\variance[1]{\mathop{\bf Var\/}\displaystyle \left[ #1 \right]}
+\newcommand\covariance[2]{\mathop{\bf Cov\/}\displaystyle \left(#1,#2 \right)}
+
+
+% machine learning
+\newcommand\subscription[2]{\boldsymbol{#1}^{(#2)}}
+
+
+
+% start of the document  
+\begin{document}
+
+\title{分布式系统原理}
+\author{任杰}
+\date{\today}
+
+\maketitle
+\tableofcontents
+
+%\setcounter{page}{1}
+
+\chapter{原理}
+
+\section{系统原理}
+
+欢迎来到分布式系统原理。\footnote{呵呵}
+
+\begin{enumerate}
+    \item a
+    \item b
+    \item c
+\end{enumerate}
+
+\begin{tabular}{|lll|}
+\hline 
+\songti 宋体    & SimSun          &\verb|\songti 宋体|   \\
+\kaishu 楷体    & KaiTi           &\verb|\kaishu 楷体|   \\
+\heiti 黑体     & SimHei          &\verb|\heiti 黑体|    \\
+\yahei 微软雅黑  & Microsoft YaHei &\verb|\yahei 微软雅黑| \\
+\fangsong 仿宋  & FangSong        &\verb|\fangsong 仿宋| \\ 
+\hline 	
+\end{tabular} 
+
+\bibliography{../../bibtex/library}{}
+\bibliographystyle{alpha}
+
+
+\printindex
+
+\end{document}
