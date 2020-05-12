@@ -95,59 +95,18 @@
 \usepackage{cite}
 
 
+\usepackage{epigraph}
+
+
+
+\newcommand\cindex[1]{\textcolor{blue}{\textbf{#1}}\index{#1}}
+
 
 % set toc and section level
 \setcounter{secnumdepth}{7}
 \setcounter{tocdepth}{7}
 
 
-
-% customized commands
-\newcommand\cindex[1]{\textcolor{blue}{\textbf{#1}}\index{#1}}
-\newcommand\mathhilight[1]{\mathop{\bf #1\/}}
-
-
-% set theory
-\newcommand\powerset[1]{\mathcal{P}\left( #1 \right)}
-\newcommand\range[1]{\mathbf{ran}(#1)}
-\newcommand\domain[1]{\mathbf{dom}(#1)}
-\newcommand\allordinals[0]{\mathbf{Ord}}
-\newcommand\transfinitesequence[1]{\left< #1 \right>}
-\newcommand\supremum[1]{\mathbf{sup} \set{#1}}
-\newcommand\infimum[1]{\mathbf{inf} \set{#1}}
-
-
-
-%linear algebra
-\newcommand\nullspace[1]{\mathcal{N}(#1)}
-\newcommand\rangespace[1]{\mathcal{R}(#1)}
-\newcommand\absolutevalue[1]{\abs{#1}}
-\newcommand\determinate[1]{\absolutevalue{#1}}
-\newcommand\coordinate[1]{\sbr{#1}}
-\newcommand\projection[2]{\mathbf{proj}_{#2} #1}
-
-
-\newcommand\dimension[1]{\displaystyle \mathbf{dim}\left( #1 \right)}
-\newcommand\rank[1]{\displaystyle \mathbf{rank}( #1 )}
-\newcommand\innerproduct[2]{\left\langle \displaystyle #1, #2 \right\rangle}
-\newcommand\trace[1]{\displaystyle \mathbf{tr}( #1 )}
-
-
-\newcommand\adjugate[1]{\displaystyle \mathbf{adj} \displaystyle #1 }
-\newcommand\cofactor[1]{\displaystyle \mathbf{cof} \displaystyle #1 }
-
-\newcommand\columnvector[1]{\boldsymbol{#1}}
-
-
-%probability
-\newcommand\probability[1]{\mathop{\bf P\/}\displaystyle \left\{#1\right\}}
-\newcommand\expect[1]{\mathop{\bf E\/}\displaystyle  \left[ #1 \right]}
-\newcommand\variance[1]{\mathop{\bf Var\/}\displaystyle \left[ #1 \right]}
-\newcommand\covariance[2]{\mathop{\bf Cov\/}\displaystyle \left(#1,#2 \right)}
-
-
-% machine learning
-\newcommand\subscription[2]{\boldsymbol{#1}^{(#2)}}
 
 
 
@@ -161,29 +120,93 @@
 \maketitle
 \tableofcontents
 
+
+\chapter*{序}
+十多年前我第一次走出校园正式从事软件开发工作。当时的一个任务是写一个批处理程序。这个程序有三个进程，需要在三台不同机器上运行。这些进程之间有先后依赖关系，需要按照特定的顺序启动。当时还没有zookeeper，也没有etcd，Raft算法还没有被发明。当时试了很多方法都没有作用。最后只能靠人来手动维护进程状态。如果发现进程因为启动顺序错误报警的话手动重启正确的进程。
+
+
+之后我就换了组，慢慢的就把这件事情遗忘了。大概一年多以后我突然想起了这个曾经让我头疼的问题。于是我请教了现在维护这个程序的开发人员。他很开心的给我展示了他的新解决方案。他做了一个很小的改动。之前每个进程如果发现所依赖的进程没有启动的话会出错退出。他把出错逻辑改成了一直重启，这样总有一次会有一个进程能启动正确，多来几次的话三个进程都能启动正确。我想了一想好像是这个道理。当时有一点不甘心。我可以写操作系统和编译器，却为什么连三个进程怎么正确启动都做不到。
+
+
+多年以后我带着这个疑问进入了互联网的世界。这时候才发现我之前碰到的是分布式系统的一个简单到不能再简单的问题。分布式系统有它特定的领域问题和解决方案。对于做工程的人来说大多数情况下这些问题都有固定的解题套路。但是市面上缺乏能把问题解释的比较清楚的教材。这便是这本书背后的动机。
+
+\rightline{任杰}
+\rightline{上海浦东}
+\rightline{2020年5月}
+
+
+
+
 %\setcounter{page}{1}
 
-\chapter{原理}
+\chapter{基础概念}
 
-\section{系统原理}
+\epigraph{A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable}{Leslie Lamport \\ Email message sent to a DEC SRC bulletin board at 12:23:29 PDT on 28 May 87.}
+\input{intro/basics}
 
-欢迎来到分布式系统原理。\footnote{呵呵}
 
-\begin{enumerate}
-    \item a
-    \item b
-    \item c
-\end{enumerate}
 
-\begin{tabular}{|lll|}
-\hline 
-\songti 宋体    & SimSun          &\verb|\songti 宋体|   \\
-\kaishu 楷体    & KaiTi           &\verb|\kaishu 楷体|   \\
-\heiti 黑体     & SimHei          &\verb|\heiti 黑体|    \\
-\yahei 微软雅黑  & Microsoft YaHei &\verb|\yahei 微软雅黑| \\
-\fangsong 仿宋  & FangSong        &\verb|\fangsong 仿宋| \\ 
-\hline 	
-\end{tabular} 
+
+\chapter{时间}
+\section{物理时间}
+
+GPS，NTP
+
+\section{逻辑时间}
+Lamport Time， Vector clock
+
+\chapter{一致性}
+\section{顺序一致性}
+
+\section{线性一致性}
+\section{ACID}
+
+\section{最终一致性}
+
+
+\chapter{共识算法}
+\section{定义}
+
+\section{Raft}
+\section{Paxos及其它}
+
+\section{复制状态机}
+
+
+\chapter{数据复制}
+\section{同步复制}
+
+\section{异步复制}
+
+\section{Quorun}
+
+\section{一致性复制}
+
+
+\chapter{数据切割}
+\section{切割原则}
+
+\section{一致性哈希}
+
+
+\chapter{混沌工程}
+
+\chapter{分布式系统案例}
+
+\section{TCP}
+\section{DNS}
+
+\section{CDN}
+
+\section{Spanner}
+
+\section{Kafka}
+
+
+
+
+
+
 
 \bibliography{../../bibtex/library}{}
 \bibliographystyle{alpha}
