@@ -99,7 +99,7 @@
 
 
 
-\newcommand\cindex[1]{\textcolor{blue}{\textbf{#1}}\index{#1}}
+\newcommand\cindex[1]{\underline{#1}\index{#1}}
 
 
 % set toc and section level
@@ -122,13 +122,7 @@
 
 
 \chapter*{序}
-十多年前我第一次走出校园正式从事软件开发工作。当时的一个任务是写一个批处理程序。这个程序有三个进程，需要在三台不同机器上运行。这些进程之间有先后依赖关系，需要按照特定的顺序启动。当时还没有zookeeper，也没有etcd，Raft算法还没有被发明。当时试了很多方法都没有作用。最后只能靠人来手动维护进程状态。如果发现进程因为启动顺序错误报警的话手动重启正确的进程。
-
-
-之后我就换了组，慢慢的就把这件事情遗忘了。大概一年多以后我突然想起了这个曾经让我头疼的问题。于是我请教了现在维护这个程序的开发人员。他很开心的给我展示了他的新解决方案。他做了一个很小的改动。之前每个进程如果发现所依赖的进程没有启动的话会出错退出。他把出错逻辑改成了一直重启，这样总有一次会有一个进程能启动正确，多来几次的话三个进程都能启动正确。我想了一想好像是这个道理。当时有一点不甘心。我可以写操作系统和编译器，却为什么连三个进程怎么正确启动都做不到。
-
-
-多年以后我带着这个疑问进入了互联网的世界。这时候才发现我之前碰到的是分布式系统的一个简单到不能再简单的问题。分布式系统有它特定的领域问题和解决方案。对于做工程的人来说大多数情况下这些问题都有固定的解题套路。但是市面上缺乏能把问题解释的比较清楚的教材。这便是这本书背后的动机。
+\input{prelude/prelude}
 
 \rightline{任杰}
 \rightline{上海浦东}
@@ -148,12 +142,13 @@
 
 
 \chapter{时间}
-\section{物理时间}
 
-GPS，NTP
+\epigraph{I’m late, I’m late! For a very important date! No time to say ‘hello, goodbye’, I’m late, I’m late, I’m late!}{The White Rabbit \\ Alice's Adventures in Wonderland}
 
-\section{逻辑时间}
-Lamport Time， Vector clock
+\input{time/physical.time}
+\input{time/logical.time}
+
+
 
 \chapter{一致性}
 \section{顺序一致性}
