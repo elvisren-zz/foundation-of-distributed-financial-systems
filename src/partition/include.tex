@@ -1,0 +1,42 @@
+\chapter{横向扩展}
+
+
+需要分库。分库和复制是在一起的，要先解决复制的问题。
+
+\section{分库的策略}
+分的原则：mece：mutually exclusive collectively exhaustive
+分的方式：by region，by hash。举例。
+by hash的问题在于不可以做range查询。
+
+\section{基于消息的事务补偿}
+不用事务的解决方案。需要和业务一起优化。
+
+\section{分布式事务和tcc}
+TCC具体实现细节。双插解决了什么问题。
+TX manager可以是单独模块，或者是第一个节点。
+
+\section{层级嵌套的分布式事务}
+
+\section{分布式查询需要次级索引}
+举例：查USD相关的交易
+
+局部和全局索引
+
+更新方式和索引
+
+\section{动态分库与合并}
+需要有一个配置中心保存当前分库情况。可以有延时。
+动态分库的步骤
+动态合并的步骤
+问题：分割会让已经很忙的节点更忙。
+分割中的服务发现：谁发现，怎么发现
+
+\section{分布式快照}
+
+
+
+\input{partition/logical.time}
+\input{partition/physical.time}
+lamport time，vector clock
+
+\section{分布式快照算法}

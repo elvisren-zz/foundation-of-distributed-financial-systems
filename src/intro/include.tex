@@ -1,0 +1,36 @@
+\chapter{引言}
+
+
+\epigraph{A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable}{Leslie Lamport \\ Email message sent to a DEC SRC bulletin board at 12:23:29 PDT on 28 May 87.}
+
+金融系统和其他系统不一样的地方在于它处理钱。人们一生的积蓄在金融系统中只是一个数字而已，因此每次对这些数字的操作都要非常小心谨慎。金融系统在以下几个方面有非常高的要求：
+\begin{enumerate}
+    \item 正确性。怎么保证是正确的。
+    \item 可解释。最后的结果是怎么一步一步产生的。
+    \item 可靠。系统在各种不同异常请夸下对正确性的保证如何。
+    \item 可维护。可持续的开发和升级。
+    \item 性能。
+\end{enumerate}
+
+换句话说，金融系统要让人用的放心，用的开心。这是一种对质量的感觉，是对架构师品味的要求。
+
+我们从设计一个支付系统入手。支付系统需要支撑用户间的转账和余额及流水的查询。当大学计算机课程讲到数据库时一般会用这个来做课后作业。那么当它作为一个全国性的基础软件时会有什么不同呢？我们会用以下章节来逐步深入的讲解：
+\begin{enumerate}
+    \item 常见的方案是怎么做的。这是一个普遍采用的方案，可以快速的解决很多行业的问题，不仅仅是金融行业。
+    \item 如何对金融行业做正确的建模。建模的过程是定义合理数据结构的过程。
+    \item 如何对金融业务的模型做合理的操作。
+    \item 如何消除数据单点，使其拥有可选的容灾性。
+    \item 如何消除服务单点。
+    \item 如何在消除系统单点的情况下保证数据的正确性。
+    \item 单点持久化存储不够的情况下的横向扩展。
+    \item 单点内存不够的情况下的业务处理。
+    \item 深入理解数据持久化。各种不同的方案对正确性都有哪些不同的保证。
+    \item 严格执行一次。
+    \item 数据处理。
+    \item 架构反思。
+\end{enumerate}
+
+
+对金融系统正确性和稳定性了解是做近一步设计系统间交互的基础。
+
+

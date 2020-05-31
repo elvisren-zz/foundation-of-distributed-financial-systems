@@ -115,7 +115,7 @@
 % start of the document  
 \begin{document}
 
-\title{分布式系统原理}
+\title{分布式金融系统基础}
 \author{任杰}
 \date{\today}
 
@@ -130,81 +130,32 @@
 \tableofcontents
 
 
-\chapter*{序}
-\input{prelude/prelude}
 
-\rightline{任杰}
-\rightline{上海浦东}
-\rightline{2020年5月}
 
 
 
 
 %\setcounter{page}{1}
 
-\chapter{基础概念}
-
-\epigraph{A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable}{Leslie Lamport \\ Email message sent to a DEC SRC bulletin board at 12:23:29 PDT on 28 May 87.}
-\input{intro/basics}
 
 
+\input{prelude/include}
+\input{intro/include}
+\input{naive.implementation/include}
+\input{domain.object/include}
+\input{event.sourcing/include}
+\input{single.point.of.data/include}
+\input{single.point.of.service/include}
+\input{consensus/include}
+\input{partition/include}
+\input{cache/include}
+\input{database/include}
+\input{exact.once/include}
+\input{data.processing/include}
+\input{chaos.engineering/include}
+\input{epilogue/include}
 
 
-\chapter{时间}
-
-\epigraph{I’m late, I’m late! For a very important date! No time to say ‘hello, goodbye’, I’m late, I’m late, I’m late!}{The White Rabbit \\ Alice's Adventures in Wonderland}
-
-\input{time/physical.time}
-\input{time/logical.time}
-
-
-
-\chapter{一致性}
-\section{顺序一致性}
-
-\section{线性一致性}
-\section{ACID}
-
-\section{最终一致性}
-
-
-\chapter{共识算法}
-\section{定义}
-
-\section{Raft}
-\section{Paxos及其它}
-
-\section{复制状态机}
-
-
-\chapter{数据复制}
-\section{同步复制}
-
-\section{异步复制}
-
-\section{Quorun}
-
-\section{一致性复制}
-
-
-\chapter{数据切割}
-\section{切割原则}
-
-\section{一致性哈希}
-
-
-\chapter{混沌工程}
-
-\chapter{分布式系统案例}
-
-\section{TCP}
-\section{DNS}
-
-\section{CDN}
-
-\section{Spanner}
-
-\section{Kafka}
 
 
 

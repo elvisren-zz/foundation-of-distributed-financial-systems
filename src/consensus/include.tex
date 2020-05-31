@@ -1,0 +1,46 @@
+\chapter{不再多龙治水-在分布式系统中达成共识}
+
+
+
+\section{共识的定义}
+3个点。
+
+\section{线性一致性的定义}
+一堆paper。
+
+\section{复制状态机}
+复制状态机和公式算法的等价性
+
+\section{consensus历史}
+3个算法
+
+\section{raft协议介绍}
+\begin{enumerate}
+    \item last index，commit index，apply index
+    \item 用户交互协议
+    \item 选主。fsync。kafka没有做fsync
+    \item 复制
+\end{enumerate}
+
+
+
+\section{和事件溯源结合}
+单独拿出来做一个log复制系统有什么问题
+
+结合在一起有什么要注意的地方。换主了怎么办。怎么分层和优化。
+
+业务主和同步主不在一起有什么问题。在一起有什么难点。
+
+\section{deploy方式}
+\begin{enumerate}
+    \item 2-3
+    \item 3-5
+    \item 3-9
+\end{enumerate}
+
+
+复制效率分析：正常情况无损失google的需要2个rpc。
+
+\section{研发成本}
+特别重要的系统需要这么复杂的设计。
+

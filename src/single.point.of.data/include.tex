@@ -1,0 +1,81 @@
+\chapter{消除数据单点}
+
+\section{为什么要做数据复制}
+备份和容灾
+
+\section{常见考虑点}
+
+系统容灾有什么要求。需要多少reliability？不一定高。
+
+传统是用硬件来做，比如raid和NAS。现在是用软件来提高系统容错率。
+
+多少种写的方式。单leader，多leader，无leader。
+
+分布式读不一致都有哪些分类。
+
+数据问题：有冲突，有丢失，有不一致
+
+怎么解决冲突
+
+怎么解决丢失
+
+怎么解决不一致
+
+摊销冲突解决的成本：读的人解决冲突还是服务器自己定时解决。
+
+不同copy可以有不同的索引。
+
+\section{单leader解法}
+复制方式：async，sync。多个备份机一起提供服务。
+
+从主读和从副节点读的问题。读是从read model读，和主业务系统的读不一样。
+
+CAP定义。为什么CAP理论不太对。假设P，但是不一定有P，比如google。
+
+
+async复制的问题：
+\begin{enumerate}
+    \item old leader rejoin
+    \item new leader discard uncommitted result
+    \item two leaders
+    \item how to detect leader is dead
+\end{enumerate}
+
+
+eventual consistency问题
+
+机器挂了怎么办
+
+如果想CAP都满足，看consensus章。
+
+
+\section{不合适的其它选择}
+
+\subsection{多leader解法}
+多个leader都可以写同一份数据。
+
+怎么发现冲突。
+
+怎么解决冲突：
+\begin{enumerate}
+    \item version vector，dotted version vector。举个购物车例子。金融行业不建议使用。
+    \item last write win LWW
+    \item 谁来resolve：server，client，read，write
+\end{enumerate}
+
+
+CRDT：转账是一类这种数据。
+
+\subsection{无leader解法}
+quorum：多写，多读
+
+sync write是一个特例。
+
+填丢失数据：client，server都可以
+
+不能回滚。因此不知道哪些数据是脏数据。金融行业不建议使用
+
+\section{Kafka举例}
+\subsection{Kafka实现原理}
+
+\subsection{用kafka实现}

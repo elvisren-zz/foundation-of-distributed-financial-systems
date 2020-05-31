@@ -1,0 +1,55 @@
+\chapter{严格一次执行}
+
+
+
+
+\section{至少一次}
+定义：上游确认下游至少收到了一次。
+
+
+实现：上游一直重试直到收到下游的确认消息。
+
+上游视角：
+\begin{enumerate}
+    \item 记录要发送消息。
+    \item 一直重试
+    \item 收到确认后更新消息状态
+\end{enumerate}
+
+
+下游视角：
+\begin{enumerate}
+    \item 收到消息
+    \item 记录消息
+    \item 返回确认消息
+\end{enumerate}
+
+
+
+异常处理：
+\begin{enumerate}
+    \item 上游消失，再选主后重试
+    \item 下游消失，通过服务发现找到新节点，再重试
+\end{enumerate}
+
+
+每个人都有上游和下游，因此在入口和出口先存再处理。
+
+\section{严格一次}
+定义：处理一次，不是存储一次。
+
+因此需要解决多次处理的问题。
+
+解决方法：
+\begin{enumerate}
+    \item 强上游：有连续的ID，通过ID是否连续来判断。减少或者有空洞都有问题
+    \item 弱上游：没有连续ID，只有ID。需要通过和所有历史数据比对来发现是否重复
+\end{enumerate}
+
+
+弱上游可能造成历史数据过多，需要减少。要和业务一起，增加command的过期时间，通过内存，硬盘和数据库一起做dedup。
+
+\section{通过消息系统}
+消息系统没有dedup能力
+
+消息系统自己的ID虽然是连续的，不能用来作为下游dedup。

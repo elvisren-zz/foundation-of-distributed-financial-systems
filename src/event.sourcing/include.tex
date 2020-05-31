@@ -1,0 +1,98 @@
+\chapter{业务实现-事件溯源设计模式}
+
+
+\section{核心模型}
+event，command，state。command到event可以有随机性。NOP event
+
+apply state：无side effect，immutable。举例：发现CPU core寄存器出问题。
+
+举支付的例子。event是+100元，不是100元。
+
+
+\section{数据持久化}
+
+event记录到log。state不需要记。command也不需要记。可以选择记录command和state前后变化。举支付例子。
+
+log实现细节：
+\begin{enumerate}
+    \item log写了一半怎么办。需要加验证。
+    \item 写append only log，记录所有状态变化的原因。user intension。又叫WAL
+    \item log是数据结构，可以写文件，或者写数据库。重点是一个只增的线性列表。
+    \item 单线程执行。原因：内存够大，oltp访问很少的数据点。
+    \item 不可篡改。行签名，再加密。跨行id，跨用户id。和区块链类似的地方和不同的地方
+    \item log需要有retention。金融一般有长达10年的保存要求，因此是转移而不是删除。可以定时，定长。
+    \item 需要能定位到log的任何位置。因此需要两个文件，一个index，一个payload。其实需要3个。还有一个是index的index，记录log retention问题。
+\end{enumerate}
+
+
+
+
+\section{CQRS}
+
+原则：一个服务只做一类事情。要么改变状态，要么查询状态。
+
+举例：提供用户所有账号的余额查询。查不到怎么办？再刷新一下就好了。
+
+读写分离。reader model。event sourcing：写。CQRS：读。读写有延时。需要最终一致性。
+
+针对不同查询可以有不同的优化和物理存储形式。不一定需要是RDBMS，但是一般这是首选。这时候数据库是一个view，不是元数据。元数据是log。
+
+
+查询有可选的延时。不想延时的话需要event和query数据放在同一个事务中。
+
+会有一定的延时。因此需要做业务补偿。举例：查询用户余额后再扣钱，可能这时候没钱了。没事刷新一下就好。频率低，影响小。
+
+读的时候如何让用户知道是数据没到还是没有。如果是看服务器时间的话，读的服务器时间和写的服务器时间不一致了怎么办。
+
+
+\section{同步调用}
+
+之前的都是用消息的方式异步调用，调用者发了command之后不知道处理情况，只能通过CQRS查询处理情况。
+
+加回调组件。可以回调给同一个人，或者制定的其他人。
+
+\section{满足的功能}
+\begin{enumerate}
+    \item 可回滚，reprocess，time machine
+    \item 可解释
+    \item future compatibility：reader model。消费event，产生新的view。
+\end{enumerate}
+
+
+
+\section{优化}
+\begin{enumerate}
+    \item 顺序写很快
+    \item 加速恢复靠snapshot。snapshot里记了最后一个offset。可以有delta snapshot，记两个offset。一段log对应一个delta offset。和memtable结构类似。
+    \item 避免多次写硬盘。log一次，b+tree两次
+    \item exact once：看最后一章。
+    \item 单线程执行。不要在核心线程上放太多内容。IO并发，加解密并发。
+\end{enumerate}
+
+\section{数学视角}
+\begin{equation}
+   S_n = f(S_{n-1}, e_n)
+    S_n = S_{n-1} + f(e_n) 
+    S_n = \sum_{I=1}^n f(e_i) 
+\end{equation}
+
+
+反向演进：$S_{n-1} = S_n - f(e_n)$
+
+假设：存在-，是+的反函数。如果+是加钱，-是减钱。举个实际例子。
+
+\section{维护}
+\begin{enumerate}
+    \item 系统升级：event version，code version
+    \item 回归测试
+\end{enumerate}
+
+\section{其他案例}
+\begin{enumerate}
+    \item 迷宫
+    \item 区块链
+\end{enumerate}
+
+
+
+
