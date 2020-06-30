@@ -71,15 +71,17 @@ log实现细节：
 
 \section{数学视角}
 \begin{equation}
-   S_n = f(S_{n-1}, e_n)
-    S_n = S_{n-1} + f(e_n) 
-    S_n = \sum_{I=1}^n f(e_i) 
+\begin{aligned}
+      S_n &= f(S_{n-1}, e_n) \\
+    S_n &= S_{n-1} + f(e_n)  \\
+    S_n &= \sum_{I=1}^n f(e_i)  
+\end{aligned}
 \end{equation}
 
 
 反向演进：$S_{n-1} = S_n - f(e_n)$
 
-假设：存在-，是+的反函数。如果+是加钱，-是减钱。举个实际例子。
+假设：存在-，是+的反函数。如果$+$是加钱，$-$是减钱。举个实际例子。
 
 \section{维护}
 \begin{enumerate}
